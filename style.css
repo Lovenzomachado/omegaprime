@@ -180,6 +180,7 @@ em { font-style: italic; color: var(--red); }
   flex: 0 0 55%;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   position: relative;
   z-index: 2;
 }
@@ -190,7 +191,13 @@ em { font-style: italic; color: var(--red); }
   justify-content: center;
   padding-top: 120px;
   padding-bottom: 80px;
-  padding-right: 60px;
+  width: 100%;
+  /* Alinha pelo mesmo grid do .container (max-width: 1160px):
+     55% de 1160px = 638px de largura útil,
+     mais o padding lateral de 36px do container */
+  max-width: calc(var(--w) * 0.55 + 36px);
+  padding-left: clamp(20px, 3.1vw, 36px);
+  padding-right: 48px;
 }
 
 .hero-eyebrow {
@@ -670,7 +677,7 @@ em { font-style: italic; color: var(--red); }
 .produto--destaque { background: var(--dark); }
 .produto--destaque:hover { background: var(--dark-2); }
 .produto--destaque h3 { color: var(--white); }
-.produto--destaque p { color: rgba(255,255,255,0.5); }
+.produto--destaque p { color: #ffffff !important; }
 .produto--destaque .produto-link { color: #FF9090; }
 
 .produto-icon {
@@ -982,6 +989,39 @@ em { font-style: italic; color: var(--red); }
 @keyframes wppPulse { 0%{transform:scale(1);opacity:0.8} 100%{transform:scale(1.65);opacity:0} }
 
 /* ============================================================
+   EYEBROW & SECTION TITLE (globais)
+   ============================================================ */
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: block;
+  margin-bottom: 14px;
+}
+.eyebrow--light { color: rgba(255,255,255,0.3); }
+
+.section-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.section-title--light { color: var(--white); }
+.section-title em { color: var(--red-2); font-style: italic; }
+
+.section-rule {
+  width: 32px;
+  height: 2px;
+  background: var(--red);
+  margin-bottom: 20px;
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 899px) {
@@ -992,12 +1032,14 @@ em { font-style: italic; color: var(--red); }
   .hero-left {
     flex: none;
     width: 100%;
-    align-items: flex-start;
+    justify-content: flex-start;
   }
   .hero-left-inner {
     padding-top: 96px;
     padding-bottom: 56px;
+    padding-left: 36px;
     padding-right: 36px;
+    max-width: 100%;
   }
   .hero-right {
     display: flex;
@@ -1027,7 +1069,9 @@ em { font-style: italic; color: var(--red); }
   .hero-left-inner {
     padding-top: 88px;
     padding-bottom: 52px;
+    padding-left: 20px;
     padding-right: 20px;
+    max-width: 100%;
   }
   .hero-proof {
     gap: 0;
